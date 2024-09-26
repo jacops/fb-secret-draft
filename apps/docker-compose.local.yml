@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/workspace
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.0
+    restart: always
+    ports:
+      - 8081:80

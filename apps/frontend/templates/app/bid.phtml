@@ -1,0 +1,48 @@
+<?php $this->headTitle('Bid'); ?>
+<div class="jumbotron">
+    <h1>Formularz bidowania</h1>
+<?php
+// within a view script
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('method', 'post');
+
+// Get the form label plugin
+$formLabel = $this->plugin('formLabel');
+
+// Render the opening tag
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+<?php
+    $name = $form->get('name');
+    $name->setAttribute('class', 'form-control');
+    $name->setAttribute('placeholder', 'Enter your Twitter handler');
+    echo $this->formLabel($name);
+    echo $this->formInput($name);
+    echo $this->formElementErrors($name);
+?></div>
+
+<div class="form-group">
+<?php
+    $element = $form->get('date');
+    $element->setAttribute('class', 'form-control');
+    echo $this->formLabel($element);
+    echo $this->formInput($element);
+    echo $this->formElementErrors($element);
+?></div>
+
+<div class="form-group">
+<?php
+    $element = $form->get('bids');
+    $element->setAttribute('class', 'form-control');
+    $element->setAttribute('rows', '15');
+    echo $this->formLabel($element);
+    echo $this->formTextArea($element);
+    echo $this->formElementErrors($element);
+?></div>
+
+<button type="submit" class="btn btn-primary">Wyślij</button>
+<?= $this->form()->closeTag() ?>
+</div>

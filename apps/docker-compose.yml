@@ -1,0 +1,29 @@
+services:
+  frontend:
+    image: "jacops/fb-secret-draft"
+    working_dir: /workspace
+    environment:
+      WEB_DOCUMENT_ROOT: "/workspace/public"
+    depends_on:
+      - db
+  db:
+    image: mysql:8
+    command: ["mysqld", "--mysql-native-password=ON"]
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-example}"
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

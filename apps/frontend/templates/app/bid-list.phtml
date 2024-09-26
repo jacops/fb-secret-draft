@@ -1,0 +1,9 @@
+<?php $this->headTitle('Bid History'); ?>
+<div class="jumbotron">
+    <h1>Historia bidów</h1>
+    <ul class="list-group">
+      <?php foreach ($this->dates as $row): ?>
+      <li class="list-group-item"><a href="<?= $this->url('bid.date', ['date' => $row['date']])?>"><?= $row['date'] ?></a></li>
+      <?php endforeach; ?>
+    </ul>
+</div>
